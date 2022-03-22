@@ -1,0 +1,121 @@
+set_location_assignment PIN_K18 -to EXP_SDOxDI[0] -comment OPT00_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[0]
+set_location_assignment PIN_D19 -to EXP_CNVxDO[0] -comment OPT00_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[0]
+set_location_assignment PIN_E19 -to EXP_SDOxDI[1] -comment OPT01_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[1]
+set_location_assignment PIN_E20 -to EXP_CNVxDO[1] -comment OPT01_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[1]
+set_location_assignment PIN_G19 -to EXP_SDOxDI[2] -comment OPT02_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[2]
+set_location_assignment PIN_F20 -to EXP_CNVxDO[2] -comment OPT02_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[2]
+set_location_assignment PIN_G20 -to EXP_SDOxDI[3] -comment OPT03_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[3]
+set_location_assignment PIN_H20 -to EXP_CNVxDO[3] -comment OPT03_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[3]
+set_location_assignment PIN_K20 -to EXP_SDOxDI[4] -comment OPT04_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[4]
+set_location_assignment PIN_J20 -to EXP_CNVxDO[4] -comment OPT04_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[4]
+set_location_assignment PIN_L20 -to EXP_SDOxDI[5] -comment OPT05_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[5]
+set_location_assignment PIN_N20 -to EXP_CNVxDO[5] -comment OPT05_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[5]
+set_location_assignment PIN_P20 -to EXP_SDOxDI[6] -comment OPT06_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[6]
+set_location_assignment PIN_N19 -to EXP_CNVxDO[6] -comment OPT06_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[6]
+set_location_assignment PIN_R20 -to EXP_SDOxDI[7] -comment OPT07_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[7]
+set_location_assignment PIN_T20 -to EXP_CNVxDO[7] -comment OPT07_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[7]
+set_location_assignment PIN_U19 -to EXP_SDOxDI[8] -comment OPT08_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[8]
+set_location_assignment PIN_U20 -to EXP_CNVxDO[8] -comment OPT08_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[8]
+set_location_assignment PIN_W20 -to EXP_SDOxDI[9] -comment OPT09_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[9]
+set_location_assignment PIN_W19 -to EXP_CNVxDO[9] -comment OPT09_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[9]
+set_location_assignment PIN_T19 -to EXP_SDOxDI[10] -comment OPT10_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[10]
+set_location_assignment PIN_Y20 -to EXP_CNVxDO[10] -comment OPT10_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[10]
+set_location_assignment PIN_U18 -to EXP_SDOxDI[11] -comment OPT11_D0
+#set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to EXP_SDOxDI[11]
+set_location_assignment PIN_V18 -to EXP_CNVxDO[11] -comment OPT11_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_CNVxDO[11]
+set_location_assignment PIN_L19 -to EXP_SCKxDO[0] -comment OPT_CLK0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_SCKxDO[0]
+set_location_assignment PIN_P19 -to EXP_SCKxDO[1] -comment OPT_CLK1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to EXP_SCKxDO[1]
+set_location_assignment PIN_V17 -to LED850xDO[0] -comment OPT12_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[0]
+set_location_assignment PIN_Y19 -to LED730xDO[0] -comment OPT12_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[0]
+set_location_assignment PIN_W18 -to LED850xDO[1] -comment OPT13_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[1]
+set_location_assignment PIN_Y18 -to LED730xDO[1] -comment OPT13_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[1]
+set_location_assignment PIN_W16 -to LED850xDO[2] -comment OPT14_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[2]
+set_location_assignment PIN_Y17 -to LED730xDO[2] -comment OPT14_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[2]
+set_location_assignment PIN_Y16 -to LED850xDO[3] -comment OPT15_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[3]
+set_location_assignment PIN_W14 -to LED730xDO[3] -comment OPT15_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[3]
+set_location_assignment PIN_Y13 -to LED850xDO[4] -comment OPT16_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[4]
+set_location_assignment PIN_Y14 -to LED730xDO[4] -comment OPT16_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[4]
+set_location_assignment PIN_V12 -to LED850xDO[5] -comment OPT17_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[5]
+set_location_assignment PIN_W11 -to LED730xDO[5] -comment OPT17_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[5]
+set_location_assignment PIN_W10 -to LED850xDO[6] -comment OPT18_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[6]
+set_location_assignment PIN_Y10 -to LED730xDO[6] -comment OPT18_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[6]
+set_location_assignment PIN_Y8 -to LED850xDO[7] -comment OPT19_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[7]
+set_location_assignment PIN_W8 -to LED730xDO[7] -comment OPT19_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[7]
+set_location_assignment PIN_Y6 -to LED850xDO[8] -comment OPT20_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[8]
+set_location_assignment PIN_W7 -to LED730xDO[8] -comment OPT20_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[8]
+set_location_assignment PIN_Y5 -to LED850xDO[9] -comment OPT21_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[9]
+set_location_assignment PIN_W5 -to LED730xDO[9] -comment OPT21_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[9]
+set_location_assignment PIN_Y7 -to LED850xDO[10] -comment OPT22_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[10]
+set_location_assignment PIN_Y4 -to LED730xDO[10] -comment OPT22_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[10]
+set_location_assignment PIN_P11 -to LED850xDO[11] -comment OPT23_D0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED850xDO[11]
+set_location_assignment PIN_R11 -to LED730xDO[11] -comment OPT23_D1
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LED730xDO[11]
+set_location_assignment PIN_W12 -to LEDhighxDO[0] -comment OPT_CLK2
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LEDhighxDO[0]
+set_location_assignment PIN_W9 -to LEDhighxDO[1] -comment OPT_CLK3
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LEDhighxDO[1]
+
+set_location_assignment PIN_L18 -to DetPwrxSO[0]
+set_location_assignment PIN_M20 -to DetPwrxSO[1]
+set_location_assignment PIN_R18 -to DetPwrxSO[2]
+
+set_location_assignment PIN_V16 -to SrcPwrxSO[0]
+set_location_assignment PIN_Y11 -to SrcPwrxSO[1]
+set_location_assignment PIN_P12 -to SrcPwrxSO[2]
+
+set_location_assignment PIN_N2 -to ArduUARTRxxDI
+#set_location_assignment PIN_P1 -to ArduUARTTxxDO
+set_location_assignment PIN_R2 -to ArduTrgOutxSO
+set_location_assignment PIN_R1 -to ArduEnxSO
+
+set_location_assignment PIN_M4 -to AuxTrgOutxSO -comment FP_AUX0
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to AuxTrgOutxSO
+

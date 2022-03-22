@@ -1,0 +1,261 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "DebugLEDxSO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "DebugLEDxSO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DebugLEDxSO[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HostFtdiUARTTxxDO",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[2]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[3]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[4]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[5]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[6]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[7]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[8]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[9]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[10]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_CNVxDO[11]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SCKxDO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SCKxDO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "AUX_CSnxSO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "AUX_CSnxSO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "AUX_SCLKxSO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "AUX_SCLKxSO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ArduTrgOutxSO",
+					"strict" : false
+				},
+				{
+					"name" : "ArduEnxSO",
+					"strict" : false
+				},
+				{
+					"name" : "AuxTrgOutxSO",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LED730xDO[7]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LED850xDO[7]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDhighxDO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDhighxDO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DetPwrxSO[0]",
+					"strict" : false
+				},
+				{
+					"name" : "DetPwrxSO[1]",
+					"strict" : false
+				},
+				{
+					"name" : "DetPwrxSO[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HostFtdiUARTRTSxSIB",
+					"strict" : false
+				},
+				{
+					"name" : "HostFtdiUARTRxxDI",
+					"strict" : false
+				},
+				{
+					"name" : "ArduUARTRxxDI",
+					"strict" : false
+				},
+				{
+					"name" : "AUX_SDOxDI[1]",
+					"strict" : false
+				},
+				{
+					"name" : "AUX_SDOxDI[0]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[10]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[9]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[8]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[11]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[2]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[1]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[0]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[3]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[5]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[6]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[4]",
+					"strict" : false
+				},
+				{
+					"name" : "EXP_SDOxDI[7]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

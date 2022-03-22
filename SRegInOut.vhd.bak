@@ -1,0 +1,190 @@
+-- Create Date: 15:25:23 01/11/2019
+-- Interface for LTC2368-24 ADC
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity ADC_RX is
+	port(
+		ClkxCI : in std_logic;
+		ResetxRI : in std_logic;
+		SClrxSI : in std_logic;
+		
+		CnvxSO	: out std_logic;
+		BusyxSI : in std_logic;
+		SDOxDI	: in std_logic;
+		SCKxSO	: out std_logic;
+		
+		PDataxDO	: out std_logic_vector(23 downto 0);
+		NSmpsAvxSO : out std_logic_vector(10 downto 0);
+		PDataRdReqxSI : in std_logic
+	);
+end ADC_RX;
+
+architecture Behavioral of ADC_RX is
+	constant N_PERIODS_PER_CONV : integer := 30;
+	constant N_ADC_AVG_CONVS : integer := 7; -- # conversions averaged in ADC
+	constant N_RX_BITS_PER_CONV : integer := 4;
+	constant N_RECV_CONVS : integer := 24/N_RX_BITS_PER_CONV;
+	
+	signal ClkCntxDP, ClkCntxDN	: integer range 0 to N_PERIODS_PER_CONV-1;
+	signal ConvCntxDP, ConvCntxDN	: integer range 0 to N_ADC_AVG_CONVS-1;
+	signal BitsCntxDP, BitsCntxDN	: integer range 0 to 24;
+	
+	type fsmstatetype is (sPreConvStart, sConvStart, sConv, sAcqLow, sAcqHigh, sReadComplete, sIdle, sPreReset, sResetLow, sResetHigh);
+	signal StatexDP, StatexDN : fsmstatetype;	
+	attribute syn_encoding : string;
+	attribute syn_encoding of fsmstatetype : type is "safe";
+	
+	signal PDataxDP, PDataxDN : std_logic_vector(PDataxDO'range);
+	signal FIFOWrReqxS : std_logic;
+	
+	COMPONENT ADC_RX_FIFO
+	PORT(
+		clock		: IN STD_LOGIC ;
+		data		: IN STD_LOGIC_VECTOR (23 DOWNTO 0);
+		rdreq		: IN STD_LOGIC ;
+		sclr		: IN STD_LOGIC ;
+		wrreq		: IN STD_LOGIC ;
+		empty		: OUT STD_LOGIC ;
+		full		: OUT STD_LOGIC ;
+		q		: OUT STD_LOGIC_VECTOR (23 DOWNTO 0);
+		usedw		: OUT STD_LOGIC_VECTOR (10 DOWNTO 0)
+	);
+	END COMPONENT;
+	
+
+begin
+
+	
+	p_memzing : process (ClkxCI, ResetxRI)
+	begin
+      if (rising_edge(ClkxCI)) then
+         if (ResetxRI = '1') then
+				ClkCntxDP <= 0;
+				ConvCntxDP <= 0;
+				StatexDP <= sPreReset;
+				BitsCntxDP <= 0;
+         else
+				ClkCntxDP <= ClkCntxDN;
+				ConvCntxDP <= ConvCntxDN;
+				StatexDP <= StatexDN;
+				BitsCntxDP <= BitsCntxDN;
+         end if;   
+			PDataxDP <= PDataxDN;
+      end if;
+   end process;
+   
+	p_memless_out_decode : process(StatexDP, ClkCntxDP, PDataxDP, BitsCntxDP, ConvCntxDP, SDOxDI)
+	begin
+		CnvxSO <= '0';
+		SCKxSO <= '0';
+		FIFOWrReqxS <= '0';
+		ClkCntxDN <= ClkCntxDP+1;
+		PDataxDN <= PDataxDP;
+		BitsCntxDN <= BitsCntxDP;
+		ConvCntxDN <= ConvCntxDP;
+		case StatexDP is
+			when sPreConvStart => 
+				ClkCntxDN <= 0;
+				BitsCntxDN <= 0;
+				if ConvCntxDP = N_ADC_AVG_CONVS-1 then
+					ConvCntxDN <= 0;
+				else
+					ConvCntxDN <= ConvCntxDP +1;
+				end if;
+			when sConvStart =>
+				CnvxSO <= '1';
+			when sConv => 
+			when sAcqLow =>
+				PDataxDN(PDataxDN'left downto 1) <= PDataxDP(PDataxDN'left-1 downto 0);
+				PDataxDN(0) <= SDOxDI;
+				BitsCntxDN <= BitsCntxDP +1;
+			when sAcqHigh =>
+				SCKxSO <= '1';
+				if BitsCntxDP = N_RX_BITS_PER_CONV then
+					BitsCntxDN <= 0;
+				end if;
+			when sReadComplete =>
+				FIFOWrReqxS <= '1';
+			when sIdle =>
+			when sPreReset =>
+				BitsCntxDN <= 0;
+			when sResetHigh =>
+				BitsCntxDN <= BitsCntxDP +1;
+				SCKxSO <= '1';	
+			when sResetLow=> 
+			when others =>
+		end case;
+   end process;
+   
+	p_memless_next_state_decode : process (StatexDP, BusyxSI, BitsCntxDP, ClkCntxDP, ConvCntxDP)
+	begin
+		StatexDN <= StatexDP;
+		case StatexDP is
+			when sPreConvStart => 
+				if BusyxSI = '0' then
+					StatexDN <= sConvStart;
+				end if;
+			when sConvStart =>
+				if BusyxSI = '1' then
+					StatexDN <= sConv;
+				end if;
+			when sConv => 
+				if BusyxSI = '0' then
+					if ConvCntxDP > N_RECV_CONVS-1 then
+						StatexDN <= sIdle;
+					else 
+						StatexDN <= sAcqLow;
+					end if;
+				end if;
+			when sAcqLow =>
+				StatexDN <= sAcqHigh;
+			when sAcqHigh =>
+				if BitsCntxDP = N_RX_BITS_PER_CONV then
+					if ConvCntxDP = N_RECV_CONVS-1 then
+						StatexDN <= sReadComplete;
+					else
+						StatexDN <= sIdle;
+					end if;
+				else
+					StatexDN <= sAcqLow;
+				end if;
+			when sReadComplete =>
+				StatexDN <= sIdle;
+			when sIdle =>
+				if ClkCntxDP = N_PERIODS_PER_CONV-2 then
+					StatexDN <= sPreConvStart;
+				end if;
+			when sPreReset => -- LTC2368-24 reset: send >20 SCK rising edges before CNV
+				if BusyxSI = '0' then
+					StatexDN <= sResetHigh;
+				end if;
+			when sResetHigh =>
+				StatexDN <= sResetLow;
+			when sResetLow => 
+				if BitsCntxDP >= 22 then
+					StatexDN <= sPreConvStart;
+				else
+					StatexDN <= sResetHigh;
+				end if;
+			when others =>
+				StatexDN <= sPreReset;
+		end case;	
+   end process;
+	
+	
+	ADC_RX_FIFO_inst : ADC_RX_FIFO 
+	PORT MAP (
+		clock	 => ClkxCI,
+		data	 => PDataxDP,
+		rdreq	 => PDataRdReqxSI,
+		sclr	 => SClrxSI,
+		wrreq	 => FIFOWrReqxS,
+		empty	 => open,
+		full	 => open,
+		q	 	 => PDataxDO,
+		usedw	 => NSmpsAvxSO
+	);
+end Behavioral;

@@ -1,0 +1,92 @@
+--a_graycounter DEVICE_FAMILY="MAX 10" PVALUE=1 WIDTH=17 aclr clock cnt_en q ALTERA_INTERNAL_OPTIONS=suppress_da_rule_internal=S102
+--VERSION_BEGIN 20.1 cbx_a_gray2bin 2020:11:11:17:06:45:SJ cbx_a_graycounter 2020:11:11:17:06:45:SJ cbx_cycloneii 2020:11:11:17:06:45:SJ cbx_mgl 2020:11:11:17:08:38:SJ cbx_stratix 2020:11:11:17:06:46:SJ cbx_stratixii 2020:11:11:17:06:46:SJ  VERSION_END
+
+
+-- Copyright (C) 2020  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
+--  and other software and tools, and any partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel FPGA IP License Agreement, or other applicable license
+--  agreement, including, without limitation, that your use is for
+--  the sole purpose of programming logic devices manufactured by
+--  Intel and sold by Intel or its authorized distributors.  Please
+--  refer to the applicable agreement for further details, at
+--  https://fpgasoftware.intel.com/eula.
+
+
+
+--synthesis_resources = reg 25 
+OPTIONS ALTERA_INTERNAL_OPTION = "suppress_da_rule_internal=S102;{-to counter9a0} POWER_UP_LEVEL=HIGH;{-to int_parity12a0} POWER_UP_LEVEL=HIGH;{-to parity10} POWER_UP_LEVEL=HIGH";
+
+SUBDESIGN a_graycounter_uvb
+( 
+	aclr	:	input;
+	clock	:	input;
+	cnt_en	:	input;
+	q[16..0]	:	output;
+) 
+VARIABLE 
+	counter9a0 : dffeas
+		WITH (
+			power_up = "high"
+		);
+	counter9a1 : dffeas;
+	counter9a2 : dffeas;
+	counter9a3 : dffeas;
+	counter9a4 : dffeas;
+	counter9a5 : dffeas;
+	counter9a6 : dffeas;
+	counter9a7 : dffeas;
+	counter9a8 : dffeas;
+	counter9a9 : dffeas;
+	counter9a10 : dffeas;
+	counter9a11 : dffeas;
+	counter9a12 : dffeas;
+	counter9a13 : dffeas;
+	counter9a14 : dffeas;
+	counter9a15 : dffeas;
+	counter9a16 : dffeas;
+	int_parity12a0 : dffe
+		WITH (
+			power_up = "high"
+		);
+	int_parity12a1 : dffe;
+	parity10 : dffeas
+		WITH (
+			power_up = "high"
+		);
+	sub_parity11a[4..0] : dffeas;
+	cntr_cout[16..0]	: WIRE;
+	parity_cout	: WIRE;
+	sclr	: NODE;
+	updown	: NODE;
+
+BEGIN 
+	counter9a[16..0].clk = clock;
+	counter9a[16..1].clrn = (! aclr);
+	counter9a[16..0].d = ( (counter9a[16].q $ cntr_cout[15..15]), (counter9a[15].q $ (counter9a[14].q & cntr_cout[14..14])), (counter9a[14].q $ (counter9a[13].q & cntr_cout[13..13])), (counter9a[13].q $ (counter9a[12].q & cntr_cout[12..12])), (counter9a[12].q $ (counter9a[11].q & cntr_cout[11..11])), (counter9a[11].q $ (counter9a[10].q & cntr_cout[10..10])), (counter9a[10].q $ (counter9a[9].q & cntr_cout[9..9])), (counter9a[9].q $ (counter9a[8].q & cntr_cout[8..8])), (counter9a[8].q $ (counter9a[7].q & cntr_cout[7..7])), (counter9a[7].q $ (counter9a[6].q & cntr_cout[6..6])), (counter9a[6].q $ (counter9a[5].q & cntr_cout[5..5])), (counter9a[5].q $ (counter9a[4].q & cntr_cout[4..4])), (counter9a[4].q $ (counter9a[3].q & cntr_cout[3..3])), (counter9a[3].q $ (counter9a[2].q & cntr_cout[2..2])), (counter9a[2].q $ (counter9a[1].q & cntr_cout[1..1])), (counter9a[1].q $ (counter9a[0].q & cntr_cout[0..0])), ((cnt_en & (counter9a[0].q $ (! parity_cout))) # ((! cnt_en) & counter9a[0].q)));
+	counter9a[0].prn = (! aclr);
+	counter9a[16..0].sclr = sclr;
+	int_parity12a[1..0].clk = ( clock, clock);
+	int_parity12a[1].clrn = (! aclr);
+	int_parity12a[1..0].d = ( ((cnt_en & sub_parity11a[4..4].q) # ((! cnt_en) & int_parity12a[1].q)), ((cnt_en & (((sub_parity11a[0..0].q $ sub_parity11a[1..1].q) $ sub_parity11a[2..2].q) $ sub_parity11a[3..3].q)) # ((! cnt_en) & int_parity12a[0].q)));
+	int_parity12a[0].prn = (! aclr);
+	parity10.clk = clock;
+	parity10.d = ((cnt_en & ((! int_parity12a[0].q) $ int_parity12a[1].q)) # ((! cnt_en) & parity10.q));
+	parity10.prn = (! aclr);
+	parity10.sclr = sclr;
+	sub_parity11a[].clk = ( clock, clock, clock, clock, clock);
+	sub_parity11a[].clrn = ( (! aclr), (! aclr), (! aclr), (! aclr), (! aclr));
+	sub_parity11a[].d = ( ((cnt_en & counter9a[16..16].q) # ((! cnt_en) & sub_parity11a[4].q)), ((cnt_en & (((counter9a[12..12].q $ counter9a[13..13].q) $ counter9a[14..14].q) $ counter9a[15..15].q)) # ((! cnt_en) & sub_parity11a[3].q)), ((cnt_en & (((counter9a[8..8].q $ counter9a[9..9].q) $ counter9a[10..10].q) $ counter9a[11..11].q)) # ((! cnt_en) & sub_parity11a[2].q)), ((cnt_en & (((counter9a[4..4].q $ counter9a[5..5].q) $ counter9a[6..6].q) $ counter9a[7..7].q)) # ((! cnt_en) & sub_parity11a[1].q)), ((cnt_en & (((counter9a[0..0].q $ counter9a[1..1].q) $ counter9a[2..2].q) $ counter9a[3..3].q)) # ((! cnt_en) & sub_parity11a[0].q)));
+	sub_parity11a[].sclr = ( sclr, sclr, sclr, sclr, sclr);
+	cntr_cout[] = ( B"0", (cntr_cout[14..14] & (! counter9a[14].q)), (cntr_cout[13..13] & (! counter9a[13].q)), (cntr_cout[12..12] & (! counter9a[12].q)), (cntr_cout[11..11] & (! counter9a[11].q)), (cntr_cout[10..10] & (! counter9a[10].q)), (cntr_cout[9..9] & (! counter9a[9].q)), (cntr_cout[8..8] & (! counter9a[8].q)), (cntr_cout[7..7] & (! counter9a[7].q)), (cntr_cout[6..6] & (! counter9a[6].q)), (cntr_cout[5..5] & (! counter9a[5].q)), (cntr_cout[4..4] & (! counter9a[4].q)), (cntr_cout[3..3] & (! counter9a[3].q)), (cntr_cout[2..2] & (! counter9a[2].q)), (cntr_cout[1..1] & (! counter9a[1].q)), (cntr_cout[0..0] & (! counter9a[0].q)), (cnt_en & parity_cout));
+	parity_cout = (((! parity10.q) $ updown) & cnt_en);
+	q[] = counter9a[16..0].q;
+	sclr = GND;
+	updown = VCC;
+END;
+--VALID FILE

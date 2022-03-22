@@ -1,0 +1,64 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+use IEEE.NUMERIC_STD.ALL;
+
+
+ENTITY LED_MOD IS 
+	PORT(
+		ClkxCI : IN STD_LOGIC;
+		ResetxRI : IN STD_LOGIC;
+		SClrxSI	: IN STD_LOGIC;
+		FreqSelxDI : IN STD_LOGIC_VECTOR(2 downto 0);
+		ModOutxSO : OUT STD_LOGIC
+		);
+END LED_MOD;
+
+ARCHITECTURE behavioral OF LED_MOD IS
+	
+	constant CNT_WIDTH : integer := 14;
+	constant N_Freq : integer := 6+1;
+	type CntBounds_Array_Type is array (0 to N_Freq-1) of unsigned(CNT_WIDTH-1 downto 0);
+	constant ModPeriod_Array : CntBounds_Array_Type := (to_unsigned(1000,CNT_WIDTH),
+																		to_unsigned(5120*2,CNT_WIDTH),
+																		to_unsigned(4480*2,CNT_WIDTH),
+																		to_unsigned(3840*2,CNT_WIDTH),
+																		to_unsigned(3584*2,CNT_WIDTH),
+																		to_unsigned(3360*2,CNT_WIDTH),
+																		to_unsigned(3072*2,CNT_WIDTH)
+																		);
+	
+	constant OnPeriod_Array : CntBounds_Array_Type := (to_unsigned(1000,CNT_WIDTH),
+																		to_unsigned(5120/2*2,CNT_WIDTH),
+																		to_unsigned(4480/2*2,CNT_WIDTH),
+																		to_unsigned(3840/2*2,CNT_WIDTH),
+																		to_unsigned(3584/2*2,CNT_WIDTH),
+																		to_unsigned(3360/2*2,CNT_WIDTH),
+																		to_unsigned(3072/2*2,CNT_WIDTH)
+																		);
+	
+	
+	signal ClkCntxDP, ClkCntxDN : unsigned(CNT_WIDTH-1 downto 0);
+
+
+BEGIN
+
+
+	ClkCntxDN <= (others => '0') when ClkCntxDP >= (ModPeriod_Array(to_integer(unsigned(FreqSelxDI))) -1) or SClrxSI = '1'
+						else ClkCntxDP +1;
+	
+	ModOutxSO <= '1' when ClkCntxDP < (OnPeriod_Array(to_integer(unsigned(FreqSelxDI))) -1)
+					else '0';
+	
+		
+	p_memzing : process (ClkxCI, ResetxRI)
+	begin
+      if (rising_edge(ClkxCI)) then
+         if (ResetxRI = '1') then
+				ClkCntxDP <= (others => '0');
+         else
+				ClkCntxDP <= ClkCntxDN;
+         end if;  
+      end if;
+   end process;
+
+END behavioral;
